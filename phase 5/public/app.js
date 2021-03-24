@@ -3,13 +3,28 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const db = firebase.firestore();
 
-    const myPost = db.collection('posts').doc('firepost');
+    const productsRef = db.collection('products'); // create reference to the collection
 
-    myPost.onSnapshot(doc => { 
+    // const query = productsRef.where('price', '>', 9) // create subset of the collection with .where(field to sort by, operator, value)
+    const query = productsRef.orderBy('price', 'desc').limit(2) // order by price descending with a limit of 2 results
+    
+    query.get()
+    .then(products => {
+        products.forEach(doc => {
+            data = doc.data()
+            document.write(`${data.name} at $${data.price} <br>`)
+        })
 
-        const data = doc.data();
-        document.querySelector('#title').innerHTML = data.title
-    }) 
+    })
+
+
+    // const myPost = db.collection('posts').doc('firepost');
+
+    // myPost.onSnapshot(doc => { 
+
+    //     const data = doc.data();
+    //     document.querySelector('#title').innerHTML = data.title
+    // }) 
 
     // myPost.onSnapshot(doc => { 
 
@@ -33,14 +48,14 @@ document.addEventListener("DOMContentLoaded", event => {
 
 });
 
-function updatePost(e) {
-    const db = firebase.firestore();
-    const myPost = db.collection('posts').doc('firepost');
-    myPost.update({
-        title: e.target.value
+// function updatePost(e) {
+//     const db = firebase.firestore();
+//     const myPost = db.collection('posts').doc('firepost');
+//     myPost.update({
+//         title: e.target.value
 
-    })
-}
+//     })
+// }
 
 // function googleLogin() {
 //     const provider = new firebase.auth.GoogleAuthProvider();
