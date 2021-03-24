@@ -5,9 +5,9 @@ import cardImage from '../assets/amanda-jones-P787-xixGio-unsplash.jpg';
 
 const Styles = styled.div`
     .jumbo {
-        background: url(${cardImage}) no-repeat fixed bottom
+        background: url(${cardImage}) no-repeat fixed bottom;
         background-size: cover;
-        color: #efefef;
+        color: #fff;
         height: 200px;
         position: relative;
         z-index: -2;
