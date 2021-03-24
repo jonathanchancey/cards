@@ -5,14 +5,25 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const myPost = db.collection('posts').doc('firepost');
 
-    myPost.get() 
-        .then(doc => { 
+    myPost.onSnapshot(doc => { 
 
-            const data = doc.data();
-            document.write( data.title + `<br>`)
-            document.write( data.views )
+        const data = doc.data();
+        document.write( data.title + `<br>`)
+        document.write( data.views + `<br>`)
+        document.write( data.createdAt + `<br>`)
+        
+    }) // firebase lets us listen to data in realtime. 
+    // onSnapshot returns a realtime stream that we can listen to with a callback function 
+
+    // myPost.get() 
+    //     .then(doc => { 
+
+    //         const data = doc.data();
+    //         document.write( data.title + `<br>`)
+    //         document.write( data.views + `<br>`)
+    //         document.write( data.createdAt )
             
-        }) // .get is an asynchronous operation that returns a promise
+    //     }) // .get is an asynchronous operation that returns a promise
 
 });
 
