@@ -8,11 +8,17 @@ document.addEventListener("DOMContentLoaded", event => {
     myPost.onSnapshot(doc => { 
 
         const data = doc.data();
-        document.write( data.title + `<br>`)
-        document.write( data.views + `<br>`)
-        document.write( data.createdAt + `<br>`)
+        document.querySelector('#title').innerHTML = data.title
+    }) 
+
+    // myPost.onSnapshot(doc => { 
+
+    //     const data = doc.data();
+    //     document.write( data.title + `<br>`)
+    //     document.write( data.views + `<br>`)
+    //     document.write( data.createdAt + `<br>`)
         
-    }) // firebase lets us listen to data in realtime. 
+    // }) // firebase lets us listen to data in realtime. 
     // onSnapshot returns a realtime stream that we can listen to with a callback function 
 
     // myPost.get() 
@@ -26,6 +32,15 @@ document.addEventListener("DOMContentLoaded", event => {
     //     }) // .get is an asynchronous operation that returns a promise
 
 });
+
+function updatePost(e) {
+    const db = firebase.firestore();
+    const myPost = db.collection('posts').doc('firepost');
+    myPost.update({
+        title: e.target.value
+
+    })
+}
 
 // function googleLogin() {
 //     const provider = new firebase.auth.GoogleAuthProvider();
